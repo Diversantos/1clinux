@@ -2,6 +2,10 @@
 disk=/dev/sdh
 logs=test.log
 
+#Drop caches
+sync
+echo 1 > /proc/sys/vm/drop_caches
+
 echo "### IOps test"
 #fio -readonly -name iops -rw=randread -bs=512 -runtime=20 -iodepth 32 -filename $disk -ioengine libaio -direct=1
 
