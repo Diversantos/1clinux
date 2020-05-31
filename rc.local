@@ -1,0 +1,4 @@
+#!/bin/bash
+mount 192.168.0.1:/mnt/backups /mnt/backups_proxmox01
+mount 192.168.0.2:/mnt/backups /mnt/backups_proxmox
+yandex-disk start
