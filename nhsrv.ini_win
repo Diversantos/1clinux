@@ -1,0 +1,80 @@
+;*******************************************************************************
+;;*
+;;* NetHASP License Manager sample configuration file.
+;;*
+;;*   boolean switches may have the values
+;;*     1, yes, true, enabled
+;;*     0, no, false, disabled
+;;*
+;;*******************************************************************************
+;
+;
+;; ------------------------------------------------------------------------------
+;; global LM settings
+;; ------------------------------------------------------------------------------
+;
+[NHS_SERVER]
+;
+NHS_USERLIST     = 250           ; maximum number of concurrent logins
+;                                 ; to this LM (default=250, max = 65520)
+;
+;;NHS_SERVERNAMES = cad, test1,   ; server names to match the name a client
+;;                  LM017,        ; requests (max 6 names, max 7 chars/name)
+;;                  oefibla
+NHS_SERVERNAMES = WINSRV
+;
+NHS_HIGHPRIORITY = no            ; run LM at high priority (default=no)
+;
+;
+;; ------------------------------------------------------------------------------
+;; settings for the IP protocol
+;; ------------------------------------------------------------------------------
+;
+[NHS_IP]
+;
+NHS_USE_UDP      = enabled   ; enabled or disabled (default: enabled)
+NHS_USE_TCP      = disabled   ; enabled or disabled (default: enabled)
+NHS_IP_portnum   = 475       ; IP port number (default: 475 (IANA registered))
+;                             ;   CAUTION: clients must use the same port !
+;
+;
+;;NHS_IP_LIMIT = 10.24.2.18-99, 10.1.1.9/16,    10.25.0.0/24,
+;;               192.0.0.*, 194.0.*.*, 11.*.*.*,
+;;               10.24.7.8-12 /30, 10.24.2.17
+;; specifies the range of stations that are allowed to access the LM
+;; the LAST byte may be a range (e.g., 10-120)
+;; the 4th, the 4th and 3rd, or the 4th and 3rd and 2nd byte may be an asterisk,
+;;   acting as wildcard (e.g., 10.*.*.*, but NOT 10.*.20.1)
+;; an additional bitmask can be specified as number of one-bits (e.g., 10.0.0.0/8)
+;NHS_IP_LIMIT = 127.0.0.1, 192.168.1.0/24
+;
+;; ------------------------------------------------------------------------------
+;; settings for the IPX protocol
+;; ------------------------------------------------------------------------------
+;
+[NHS_IPX]
+;
+NHS_USE_IPX       = disabled  ; enabled or disabled (default: enabled)
+;;NHS_addrpath     = c:\temp  ; pathname for haspaddr.dat (default: current dir)
+NHS_AppendAddr    = no       ; append to haspaddr.dat (default: replace)
+NHS_usesap        = enabled  ; enabled or disabled (default: enabled)
+NHS_ipx_socketnum = 0x7483   ; IPX socket number (default: 0x7483)
+;                             ;   CAUTION: clients must use the same number !
+;
+;
+;; ------------------------------------------------------------------------------
+;; settings for the NetBios protocol
+;; ------------------------------------------------------------------------------
+;
+[NHS_NETBIOS]
+;
+NHS_USE_NETBIOS   = disabled  ; enabled or disabled (default: enabled)
+;;NHS_NBNAME       = MyNBName ; use another than predefined NetBios name
+;                             ;   CAUTION: clients must use the same name !
+;;NHS_use_lana_nums = 3,0,7,2  ; default = all (automatic)
+;
+;
+;; ------------------------------------------------------------------------------
+;; end of file
+;; ------------------------------------------------------------------------------
+;

@@ -13,14 +13,17 @@ compress=7
 cd ${bindir}
 
 # Backup globals
-pg_dumpall --globals-only > ${datename}_globals-only.sql
+echo "Backuping Globals..."
+pg_dumpall --globals-only -f ${dstdir}/${datename}_globals-only.sql
 
 # Backup schema
-pg_dumpall --schema-only > ${datename}_schema-only.sql
+echo "Backuping SCHEMA..."
+#pg_dumpall --schema-only -f ${dstdir}/${datename}_schema-only.sql
 
 # Backup databases listed in file
 for dbname in $(cat ${dblist})
 do
-        pg_dump -Fc -Z${compress} ${dbname} -f ${dstdir}/${dbname}_${datename}.sql.backup
+	echo "Backuping ${dbname}..."
+        #pg_dump -Fc -Z${compress} ${dbname} -f ${dstdir}/${dbname}_${datename}.sql.backup
 done
 
