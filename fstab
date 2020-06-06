@@ -1,0 +1,1 @@
+//192.168.1.1/docs	/mnt/docs	cifs	rw,credentials=/root/creds/creds,dir_mode=0777,file_mode=0666		0 0
