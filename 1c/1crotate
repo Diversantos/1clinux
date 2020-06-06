@@ -1,0 +1,23 @@
+/mnt/1clogs/logs/*/* /mnt/1clogs/logs/* {
+	hourly
+	rotate 2
+	maxage 2
+	copytruncate
+	olddir /mnt/1clogs/old
+#	delaycompress
+	missingok
+	notifempty
+	create 777 nobody nogroup
+}
+
+/mnt/1clogs/old/* {
+	hourly
+	rotate 2
+	maxage 2
+	copytruncate
+#	delaycompress
+	missingok
+	notifempty
+	create 777 nobody nogroup
+}
+

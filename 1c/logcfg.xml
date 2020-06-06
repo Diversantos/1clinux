@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://v8.1c.ru/v8/tech-log">
+	<log history="24" location="/mnt/1clogs/logs">
+		<event>
+                        <eq property="name" value="LEAKS"/>
+                </event>
+                <event>
+                        <eq property="name" value="SDBL"/>
+                </event>
+                <event>
+                        <eq property="name" value="EXCP"/>
+                </event>
+                <event>
+                        <eq property="name" value="EXCPCNTX"/>
+                </event>
+                <event>
+                        <eq property="name" value="EXCP"/>
+                </event>
+                <event>
+                        <eq property="name" value="MEM"/>
+                </event>
+                <property name="all"/>
+        </log>
+</config>
