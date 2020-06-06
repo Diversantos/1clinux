@@ -1,2 +1,0 @@
-CREATE TABLE foo(a INTEGER);
-INSERT INTO foo VALUES(generate_Series(1,10000000));
