@@ -1,0 +1,65 @@
+CREATE EXTENSION pg_strom ;
+
+
+CREATE DATABASE test41;
+\c test41
+CREATE EXTENSION pg_strom ;
+
+CREATE TABLE t_test AS
+SELECT       x, 'a'::char(100) AS y, 'b'::char(100) AS z
+FROM   generate_series(1, 5000000) AS x
+ORDER BY random();
+
+SELECT count(*)
+FROM   t_test
+WHERE sqrt(x) > 0
+GROUP BY y;
+
+\list
+\dt
+\q
+
+
+CREATE DATABASE test_fuck;
+\c test_fuck
+
+SELECT inc(21) ;
+
+
+
+
+CREATE TABLE x_test AS
+SELECT       x, (random()*10)::float AS y, random()*10::float AS z
+FROM   generate_series(1, 5000000) AS x
+ORDER BY random();
+
+SELECT x, y
+FROM   x_test
+WHERE sqrt(x) > 0
+GROUP BY y;
+
+SELECT y, z, sqrt(sqrt(z^222))^3 as fuck, exp(( * (random() * 10)))  as rand
+FROM   y_test
+GROUP BY y, z;
+
+
+
+
+make PG_CONFIG=/usr/pgsql-10/bin/pg_config
+sudo make install PG_CONFIG=/usr/pgsql-10/bin/pg_config
+
+
+
+src/relscan.c: В функции «__fixup_indexqual_operand»:
+src/relscan.c:312:2: ошибка: слишком мало аргументов в вызове функции «expression_tree_mutator»
+  return expression_tree_mutator(node, __fixup_indexqual_operand, indexOpt);
+    ^
+    In file included from src/pg_strom.h:94:0,
+                     from src/relscan.c:18:
+                     /usr/pgsql-10/include/server/nodes/nodeFuncs.h:57:14: замечание: declared here
+                      extern Node *expression_tree_mutator(Node *node, Node *(*mutator) (),
+                                    ^
+                                    src/relscan.c:313:1: предупреждение: control reaches end of non-void function [-Wreturn-type]
+                                     }
+                                     
+                                     
