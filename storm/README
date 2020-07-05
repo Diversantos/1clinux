@@ -1,0 +1,46 @@
+
+On host
+
+vi /etc/default/grub
+---> GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"
+update-grub
+
+echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
+
+echo "vfio" >> /etc/modules
+echo "vfio_iommu_type1" >> /etc/modules
+echo "vfio_pci" >> /etc/modules
+echo "vfio_virqfd" >> /etc/modules
+
+lspci -n -s 03.00
+echo "options vfio-pci ids=10de:1e89,10de:10f8,10de:1ad8,10de:1ad9 #disable_vga=1" > /etc/modprobe.d/vfio.conf  
+
+???
+apt-get install -t buster-backports nvidia-driver
+
+cat /etc/pve/qemu-server/100.conf
+args: -cpu 'host,+kvm_pv_unhalt,+kvm_pv_eoi,hv_vendor_id=willitwork,kvm=off'
+bios: ovmf
+cpu: host
+hostpci1: 03:00,pcie=1
+machine: q35
+numa: 1
+vga: none
+
+
+On virtual
+echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist options nouveau modeset=0" >> /etc/modprobe.d/blacklist.conf
+
+lshw -numeric -C display
+
+yum groupinstall "Development Tools"
+yum install kernel-devel epel-release
+yum install dkms
+
+wget http://ru.download.nvidia.com/XFree86/Linux-x86_64/440.100/NVIDIA-Linux-x86_64-440.100.run
+
+nvidia-smi
