@@ -1,4 +1,7 @@
 
+https://pve.proxmox.com/wiki/Pci_passthrough
+https://habr.com/ru/post/437598/
+
 On host
 
 vi /etc/default/grub
@@ -44,3 +47,45 @@ yum install dkms
 wget http://ru.download.nvidia.com/XFree86/Linux-x86_64/440.100/NVIDIA-Linux-x86_64-440.100.run
 
 nvidia-smi
+
+
+############################################################################################################3
+yum -y yum-utils install nano mc wget net-tools rpm-build gcc make glibc-devel bison flex python-devel tcl-devel readline-devel zlib-devel openssl-devel krb5-devel e2fsprogs-devel gettext pam-devel openldap-devel icu libicu libicu-devel
+yum -y install xorg-x11-fonts-Type1 xorg-x11-fonts-truetype
+yum install -y curl cabextract xorg-x11-font-utils fontconfig
+rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+yum install ImageMagick.i686 ImageMagick libgsf.i686 unixODBC.i686 glib2.i686
+
+
+### Postgres
+tar -xvf postgresql_10.5_11.1C_x86_64_rpm.tar.bz2
+su - postgres
+echo "export PATH=/usr/pgsql-9.4/bin:$PATH" >> .bash_profile
+echo "export MANPATH=/usr/pgsql-9.4/share/man:$MANPATH" >> .bash_profile
+/usr/pgsql-10/bin/initdb -D /var/lib/pgsql/10/data --locale=ru_RU.UTF-8
+
+
+### PGStorm
+yum install epel-release
+yum install https://heterodb.github.io/swdc/yum/rhel7-x86_64/heterodb-swdc-1.0-1.el7.noarch.rpm
+yum install postgresql-alternatives
+
+---> CUDA Toolkit from NVidia
+sudo yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo
+sudo yum clean all
+sudo yum -y install nvidia-driver-latest-dkms cuda
+sudo yum -y install cuda-drivers
+
+yum install libpmem libpmem-devel.x86_64
+cd pg-strom
+make PG_CONFIG=/usr/pgsql-10/bin/pg_config
+sudo make install PG_CONFIG=/usr/pgsql-10/bin/pg_config
+
+dracut -f
+
+
+### 1C
+tar -xvf rpm64_8_3_13_1865.tar.gz
+chown -R usr1cv8:grp1cv8 /opt/1C
+
+
