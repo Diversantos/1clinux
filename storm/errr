@@ -1,0 +1,70 @@
+append_path = create_append_path(
+root, 
+joinrel, 
+NIL, 
+subpaths_list,
+NIL, 
+required_outer,
+parallel_nworkers, 
+true,
+partitioned_rels, 
+-1.0);
+
+
+extern AppendPath *create_append_path(
+PlannerInfo *root, 
+RelOptInfo *rel,                
+List *subpaths, 
+List *partial_subpaths,           
+Relids required_outer,               
+int parallel_workers, 
+bool parallel_aware,                       
+List *partitioned_rels, 
+double rows);
+
+
+extern AppendPath *create_append_path(
+PlannerInfo *root, 
+RelOptInfo *rel,                                
+List *subpaths,
+List *partial_subpaths,                             
+Relids required_outer,                     
+int parallel_workers, 
+bool parallel_aware,                            
+List *partitioned_rels, 
+double rows,  
+                        
+bool pull_tlist, 
+List *pathkeys);
+
+
+
+/gpuinfo\" -I /usr/local/cuda/include -I. -I./ -I/usr/pgsql-10/include/server -I/usr/pgsql-10/include/internal  -D_GNU_SOURCE -I/usr/include/libxml2  -I/usr/include  -c -o src/relscan.o src/relscan.c
+src/relscan.c: В функции «__fixup_indexqual_operand»:
+src/relscan.c:312:2: предупреждение: при передаче аргумента 4 «expression_tree_mutator» указатель преобразуется в целое без приведения типа [по умолчанию включена]
+  return expression_tree_mutator(node, __fixup_indexqual_operand, indexOpt, NIL);
+  ^
+In file included from src/pg_strom.h:91:0,
+                 from src/relscan.c:18:
+/usr/pgsql-10/include/server/nodes/nodeFuncs.h:57:14: замечание: expected «int» but argument is of type «struct List *»
+ extern Node *expression_tree_mutator(Node *node, Node *(*mutator) (),
+              ^
+gcc -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC  -D__PGSTROM_MODULE__=1 "-DPGSTROM_VERSION=\"2.3\"" -DCPU_ARCH=\"x86_64\" -DPGSHAREDIR=\"/usr/pgsql-10/share\" -DPGSERV_INCLUDEDIR=\"/usr/pgsql-10/include/server\" -DCUDA_INCLUDE_PATH=\"/usr/local/cuda/include\" -DCUDA_BINARY_PATH=\"/usr/local/cuda/bin\" -DCUDA_LIBRARY_PATH=\"/usr/local/cuda/lib64\" -DCUDA_MAXREGCOUNT=128 -DCMD_GPUINFO_PATH=\"/usr/pgsql-10/bin/gpuinfo\" -I /usr/local/cuda/include -I. -I./ -I/usr/pgsql-10/include/server -I/usr/pgsql-10/include/internal  -D_GNU_SOURCE -I/usr/include/libxml2  -I/usr/include  -c -o src/gpu_tasks.o src/gpu_tasks.c
+gcc -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC  -D__PGSTROM_MODULE__=1 "-DPGSTROM_VERSION=\"2.3\"" -DCPU_ARCH=\"x86_64\" -DPGSHAREDIR=\"/usr/pgsql-10/share\" -DPGSERV_INCLUDEDIR=\"/usr/pgsql-10/include/server\" -DCUDA_INCLUDE_PATH=\"/usr/local/cuda/include\" -DCUDA_BINARY_PATH=\"/usr/local/cuda/bin\" -DCUDA_LIBRARY_PATH=\"/usr/local/cuda/lib64\" -DCUDA_MAXREGCOUNT=128 -DCMD_GPUINFO_PATH=\"/usr/pgsql-10/bin/gpuinfo\" -I /usr/local/cuda/include -I. -I./ -I/usr/pgsql-10/include/server -I/usr/pgsql-10/include/internal  -D_GNU_SOURCE -I/usr/include/libxml2  -I/usr/include  -c -o src/gpuscan.o src/gpuscan.c
+src/gpuscan.c: В функции «fixup_varnode_to_origin»:
+src/gpuscan.c:1593:12: ошибка: слишком мало аргументов в вызове функции «expression_tree_mutator»
+            (void *)custom_scan_tlist);
+            ^
+In file included from src/pg_strom.h:91:0,
+                 from src/gpuscan.c:18:
+/usr/pgsql-10/include/server/nodes/nodeFuncs.h:57:14: замечание: declared here
+ extern Node *expression_tree_mutator(Node *node, Node *(*mutator) (),
+              ^
+src/gpuscan.c:1594:1: предупреждение: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/gpuscan.o] Ошибка 1
+[root@pgstorm pg_strom-2.3]#
+[root@pgstorm init.d]# OA
+bash: OA: команда не найдена...
+
